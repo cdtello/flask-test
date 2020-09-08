@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+    
+
+{% block content %}
+    {% if producto %}
+        <h1>Editar producto: {{producto.codigo}} {{producto.nombre}}</h1>
+    {% else %}
+        <h1>Crear producto</h1>
+    {% endif %}
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <label for="codigo">Codigo</label>
+        <input type="text" name="codigo" required {% if producto %} value="{{producto.codigo}}" {% endif %}/>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" {% if producto %} value="{{producto.nombre}}" {% endif %}/>
+
+        <label for="categoria">Categoria</label>
+        {% if categorias %}
+            <select name="categoria">
+                {% for categoria in categorias  %}
+                    
+                     
+                    <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
+        {% endif %} 
+        
+
+        <label for="precio">Precio</label>
+        <input type="number" name="precio" {% if producto %} value="{{producto.precio}}" {% endif %}/>
+
+        <label for="cantidad">Cantidad</label>
+        <input type="number" name="cantidad" {% if producto %} value="{{producto.cantidad_bodega}}" {% endif %}/>
+
+        <label for="estado">Estado</label>
+        <input type="checkbox" name="estado" {% if producto %} {% if producto.estado %} checked {% endif %}{% endif %}/>
+
+        <input type="submit" value="Guardar"/>
+    </form>
+{% endblock content %}
+    

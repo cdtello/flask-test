@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+    
+
+{% block content %}
+    {% if factura %}
+        <h1>Editar Factura: {{factura.id}} | Cliente:</h1>
+    {% else %}
+        <h1>Crear Factura</h1>
+    {% endif %}
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <label for="cedula">Cédula Cliente</label>
+        <input type="text" name="cedula" required {% if factura %} value="" {% endif %}/>
+
+        <label for="productos">Seleccione Productos:</label>
+        {% if productos %}
+            <select name="productos" multiple>
+                {% for producto in productos  %}                 
+                    <option value="{{producto.id}}">{{producto.nombre}} ${{producto.precio}}</option>
+                {% endfor %}
+            </select>
+        {% endif %} 
+
+        <label for="metodopago">Método de Pago</label>
+        <select name="metodopago" id="metodopago">
+            <option value="Tarjeta">Tarjeta</option>
+            <option value="Efectivo">Efectivo</option>
+        </select>
+
+
+        <input type="submit" value="Guardar"/>
+    </form>
+{% endblock content %}
+    

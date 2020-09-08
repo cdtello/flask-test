@@ -1,0 +1,30 @@
+{% extends 'layout.html' %} {% block title %} Inicio {% endblock title %} {%
+block content %}
+    <h1>Listado de Categorias</h1>
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    {% for categoria in categorias %}
+        <article class="article-item">
+            <div class="data">
+                <h2>
+                    <a href="{{url_for('categoria', categoria_id = categoria.id)}}"> {{categoria.nombre}} </a>
+                </h2>
+                
+                <p>
+                    <a href="{{url_for('editar_categoria', categoria_id=categoria.id)}}" class="btn btn-warning">Editar</a>
+                    <a href="{{url_for('borrar_categoria', categoria_id=categoria.id)}}" class="btn ">Eliminar</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    {% endfor %} 
+{% endblock content %}

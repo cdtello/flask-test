@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}
+    {{cliente.cedula}}
+{% endblock %}
+
+
+{% block content %}
+    <h2 class="title">
+        {{cliente.nombre}}
+        <div >
+            <img style="height: 300px;" src="/static/images/{{cliente.foto}}" alt="foto"/>
+        </div>
+    </h2>
+    
+    <span class="date">
+        {{cliente.direccion}} | {{cliente.telefono}}
+    </span>
+    <p>
+        
+    </p>
+    <p>
+        <a href="{{url_for('editar_cliente', cliente_id=cliente.id)}}" class="btn btn-warning">Editar</a>
+        <a href="{{url_for('borrar_cliente', cliente_id=cliente.id)}}" class="btn ">Eliminar</a>
+    </p>
+{% endblock %}
+    

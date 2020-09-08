@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}
+    {{factura.id}}
+{% endblock %}
+
+
+{% block content %}
+    <h2 class="title">
+        Codigo Factura: {{factura.id}}
+        Productos:
+    </h2>
+    {% for producto in factura.productos  %}                 
+        <span class="date">
+            {{producto.nombre}} | Valor: {{producto.precio}}
+        </span>
+    {% endfor %}
+    <span class="date">
+        # Productos: {{factura.cantidad_productos}} | Valor Total: {{factura.valor_total}}
+    </span>
+    <h2 class="title">
+        Medio de pago:
+    </h2>
+    <p>
+        {{factura.metodo_pago}}
+    </p>
+    <h2 class="title">
+        Cliente:
+    </h2>
+    <p>
+        {{cliente.cedula}}
+        {{cliente.nombre}}
+    </p>
+    
+{% endblock %}
+    

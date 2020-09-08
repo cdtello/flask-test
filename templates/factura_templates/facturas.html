@@ -1,0 +1,32 @@
+{% extends 'layout.html' %} {% block title %} Inicio {% endblock title %} {%
+block content %}
+    <h1>Listado de Facturas</h1>
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    {% for factura in facturas %}
+        <article class="article-item">
+            <div class="data">
+                <h2>
+                    <a href="{{url_for('factura', factura_id = factura.id)}}"> Codigo Factura: {{factura.id}} </a>
+                </h2>
+                <span class="date">
+                   # Productos: {{factura.cantidad_productos}} | Valor Total: {{factura.valor_total}}
+                </span>
+                <p>
+                    
+                </p>
+                
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    {% endfor %} 
+{% endblock content %}

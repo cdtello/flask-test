@@ -1,0 +1,38 @@
+{% extends 'layout.html' %} {% block title %} Inicio {% endblock title %} {%
+block content %}
+    <h1>Listado de Clientes</h1>
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    {% for cliente in clientes %}
+        <article class="article-item">
+            <div class="data">
+                <h2>
+                    <a href="{{url_for('cliente', cliente_id = cliente.id)}}"> {{cliente.nombre}} </a>
+                </h2>
+                <div class="image-wrap">
+                    <img src="static/images/{{cliente.foto}}" alt="foto"/>
+                </div>
+                <span class="date">
+                    {{cliente.direccion}} | {{cliente.telefono}}
+                </span>
+                <p>
+                    
+                </p>
+                <p>
+                    <a href="{{url_for('editar_cliente', cliente_id=cliente.id)}}" class="btn btn-warning">Editar</a>
+                    <a href="{{url_for('borrar_cliente', cliente_id=cliente.id)}}" class="btn ">Eliminar</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    {% endfor %} 
+{% endblock content %}

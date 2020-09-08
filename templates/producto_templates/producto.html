@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}
+    {{producto.codigo}}
+{% endblock %}
+
+
+{% block content %}
+    <h2 class="title">
+        {{producto.codigo}}
+    </h2>
+    
+    <span class="date">
+        {{producto.nombre}} | {{producto.precio}} | Categoria: {{categoria.nombre}}
+    </span>
+    <p>
+    </p>
+    <p>
+        <a href="{{url_for('editar_producto', producto_id=producto.id)}}" class="btn btn-warning">Editar</a>
+        <a href="{{url_for('borrar_producto', producto_id=producto.id)}}" class="btn ">Eliminar</a>
+    </p>
+{% endblock %}
+    

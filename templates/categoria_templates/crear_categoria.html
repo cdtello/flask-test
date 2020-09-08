@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+    
+
+{% block content %}
+    {% if categoria %}
+        <h1>Editar Categoria: {{categoria.nombre}}</h1>
+    {% else %}
+        <h1>Crear Categoria</h1>
+    {% endif %}
+
+    {% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="message alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}   
+        {% endif %}   
+    {% endwith %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" {% if categoria %} value="{{categoria.nombre}}" {% endif %}/>
+
+
+        <input type="submit" value="Guardar"/>
+    </form>
+{% endblock content %}
+    
